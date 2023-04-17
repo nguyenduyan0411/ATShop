@@ -1,0 +1,115 @@
+<div ng-controller="ctrl-product">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-primary shadow">
+				<div class="card-header">
+					<h3 class="m-0 font-weight-bold text-primary">Product Management</h3>
+				</div>
+				<div class="card-body row">
+					<div class="form-group col-md-6">
+						<label for="title">Category id</label>
+						<select ng-model="form.category.categoryId" class="form-control">
+			                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
+			            </select>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Product id</label>
+						<input ng-model="form.productId" class="form-control">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Product name</label>
+						<input ng-model="form.productName" class="form-control">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Product price</label>
+						<input ng-model="form.productPrice" class="form-control">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Product quantity</label>
+						<input ng-model="form.productQuantity" class="form-control">
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label for="title">Product image</label>
+						<div class="custom-file mb-4">
+	                    	<label for="image" class="custom-file-label">{{form.productImage}}</label>
+	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
+	                    </div>						
+					</div>
+
+
+					<div class="form-group col-md-6">
+						<label for="title">Description</label>
+						<textarea ng-model="form.productDescription" class="form-control" rows="5" cols="4"></textarea>
+					</div>
+					<div class="form-group col-md-6 text-center" style="align-items: center; display: flex;">
+						<label for="image" style="margin: 0;">
+							<img ng-src="{{'/folder/images/' + form.productImage}}" style="width: 15%;" />
+						</label>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button ng-click="create()" class="btn btn-success btn-sm">Insert</button>
+					<button ng-click="update()" class="btn btn-warning btn-sm">Update</button>
+					<button ng-click="delete(form.productId)" class="btn btn-danger btn-sm">Delete</button>
+					<button ng-click="reset()" class="btn btn-primary btn-sm">Reset</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="card shadow mt-3">
+		<div class="card-header" style="display: flex; justify-content: space-between">
+			<h3 class="m-0 font-weight-bold text-primary">List Products</h3>
+			<h6>{{currentPage}} of {{totalPages()}}</h6>
+		</div>
+		<div class="card-body">
+			<table id="example1" class="table table-bordered table-striped text-center">
+				<thead>
+					<tr>
+						<td>Category id</td>
+						<td>Product id</td>
+						<th>Name</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Create date</th>
+						<th>Image</th>
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="product in getCurrentItems()">
+						<td style="width: 5%">{{product.category.categoryId}}</td>
+						<td style="width: 10%">{{product.productId}}</td>
+						<td style="width: 20%">{{product.productName}}</td>
+						<td style="width: 5%">{{product.productQuantity}}</td>
+						<td>${{product.productPrice}}</td>
+						<td>{{product.productCreateDate}}</td>
+						<td style="width: 10%"><img style="width: 50%; height: auto" ng-src="/folder/images/{{product.productImage}}" alt="" /></td>
+						<td>
+							<button ng-click="edit(product.productId)" class="btn btn-light btn-sm">Edit</button>
+							<button ng-click="delete(product.productId)" class="btn btn-danger btn-sm">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="col-12">
+				<div class="col-12">
+					<nav aria-label="..." class="mt-4 d-flex justify-content-center">
+	                	<ul class="pagination">
+	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPageFirst()">First</a></li>
+	
+	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage - 1)">Previous</a></li>
+	                            
+	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage + 1)">Next</a></li>
+	
+	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPageLast()">Last</a></li>
+	                	</ul>
+	                </nav>
+				</div>		
+			</div>
+			
+		</div>
+	</div>
+</div>

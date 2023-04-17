@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/web/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${order}">
+		<div class="container-fluid">
+			<div class="row px-xl-5">		
+				<!-- Checkout Start -->
+				<div class="col-lg-12">
+		            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Information</span></h5>
+		            <div class="bg-light p-30">
+		                <div class="row">
+		                    <div class="col-md-6 form-group">
+		                        <label>Order Number:</label>
+		                        <input class="form-control" th:field="*{orderId}" readonly/>
+		                    </div>
+		                    <div class="col-md-6 form-group">
+		                        <label>Purhaser:</label>
+		                        <input class="form-control" th:field="*{account.userFullname}" readonly/>
+		                    </div>
+		                    <div class="col-md-6 form-group">
+		                        <label>Purhased Date:</label>
+		                        <input class="form-control" th:field="*{createdDate}" readonly/>
+		                    </div>
+		                    <div class="col-md-12 form-group">
+		                        <label>Shipping Address</label>
+		                        <textarea th:field="*{address}" cols="30" rows="5" class="col-md-12 form-group" readonly></textarea>
+		                    </div>
+		                </div>
+		            </div>
+		            
+		            <h5 class="section-title position-relative text-uppercase mt-3"><span class="bg-secondary pr-3">Order Details</span></h5>
+		            <table class="table table-light table-borderless table-hover text-center mb-0">
+						<thead class="thead-dark">
+							<tr>
+								<th>Product id</th>
+								<th>Product name</th>
+								<th>Product image</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody class="align-middle">
+							<tr th:each="detail: *{orderDetails}" th:object="${detail}">
+								<td class="align-middle">[[*{product.productId}]]</td>
+								<td class="align-middle">[[*{product.productName}]]</td>
+								<td style="width: 10%" class="align-middle"><img th:src="@{'/folder/images/' + *{product.productImage}}" style="width: 30%;" /></td>
+								<td class="align-middle">$[[*{#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}]]</td>
+								<td class="align-middle">[[*{quantity}]]</td>
+								<td class="align-middle">$[[*{#numbers.formatDecimal(price * quantity, 0, 'COMMA', 2, 'POINT')}]]</td>
+							</tr>
+						</tbody>
+					</table>
+		            
+		            
+		        </div>
+		        <!-- Checkout End -->
+			</div>	
+		</div>
+	</main>
+</body>
+
+</html>

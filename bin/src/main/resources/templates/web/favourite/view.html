@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/web/layout/index :: dynamic(~{::main})}">
+
+
+
+<body>
+	<main th:object="${item}">
+		
+		<!-- Products Start -->
+		<div class="container-fluid pt-5 pb-3">
+			<h2
+				class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+				<span class="bg-secondary pr-3">Your Favourite Products</span>
+			</h2>
+			<div class="row px-xl-5">
+				<div class="col-lg-3 col-md-4 col-sm-6 pb-1" th:each="p : ${favourite}">
+					<div class="product-item bg-light mb-4">
+						<div class="product-img position-relative overflow-hidden">
+							<img class="img-fluid w-100" th:src="@{'/folder/images/' + ${p.productImage}}">
+							<div class="product-action">
+								<!-- '${p.productId}' để cho AngularJs biết đây là chuỗi. Nếu không mặc định ng-click chỉ lấy giá trị số -->
+								<a th:attr="ng-click=@{|cart.add('${p.productId}')|}" class="btn btn-outline-dark btn-square" href=""><i
+									class="fa fa-shopping-cart"></i></a>
+								<a class="btn btn-outline-dark btn-square" th:href="@{'/product/detail/' + ${p.productId}}"><i
+									class="fa fa-search"></i></a>
+							</div>
+						</div>
+						<div class="text-center py-4">
+							<a class="h6 text-decoration-none text-truncate" href="" th:utext="${p.productName}"></a>
+							<div class="d-flex align-items-center justify-content-center mt-2">
+								<h5 th:utext="'$' + ${p.productPrice}"></h5>
+								<h6 class="text-muted ml-2">
+									<del>$123.00</del>
+								</h6>
+							</div>
+							<div class="d-flex align-items-center justify-content-center mb-1">
+								<small class="fa fa-star text-primary mr-1"></small> <small
+									class="fa fa-star text-primary mr-1"></small> <small
+									class="fa fa-star text-primary mr-1"></small> <small
+									class="fa fa-star text-primary mr-1"></small> <small
+									class="fa fa-star text-primary mr-1"></small> <small>(99)</small>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Products End -->
+		
+		<div class="col-12">
+    		<ul class="pagination justify-content-center">
+				<th:block th:if="${currentPage == 1}">
+					<li class="page-item">
+	            		<a class="page-link" disabled>Previous</a>
+	        		</li>
+				</th:block>
+				<th:block th:if="${currentPage > 1}">
+	        		<!-- Prev -->
+	        		<li class="page-item">
+	            		<a class="page-link" th:href="@{/favourite/view(page=${currentPage - 1})}">Previous</a>
+	        		</li>	
+				</th:block>
+
+				<th:block th:if="${maxPages == 0}">
+					<li class="page-item">
+            			<a class="page-link">1</a>
+	        		</li>
+				</th:block>
+				<th:block th:if="${maxPages > 0}">
+	        		<li class="page-item" th:each="pageNum : ${#numbers.sequence(1, maxPages)}">
+	            		<a class="page-link" th:href="@{/favourite/view(page=${pageNum})}" th:classappend="${pageNum == currentPage} ? 'active'">[[${pageNum}]]</a>
+	        		</li>	
+				</th:block>
+
+				<th:block th:if="${currentPage < maxPages}">
+	        		<li class="page-item">
+	            		<a class="page-link" th:href="@{/favourite/view(page=${currentPage + 1})}">Next</a>
+	        		</li>
+        		</th:block>
+        		<th:block th:unless="${currentPage < maxPages}">
+	        		<li class="page-item">
+	            		<a class="page-link" disabled>Next</a>
+	        		</li>
+        		</th:block>
+    		</ul>
+		</div>
+	
+	
+		<!-- Vendor Start -->
+		<div class="container-fluid py-5">
+			<div class="row px-xl-5">
+				<div class="col">
+					<div class="owl-carousel vendor-carousel">
+						<div class="bg-light p-4">
+							<img src="/folder/logo/jordan.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/nike.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/jordan.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/nike.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/jordan.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/nike.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/jordan.png" alt="">
+						</div>
+						<div class="bg-light p-4">
+							<img src="/folder/logo/nike.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Vendor End -->
+	</main>
+</body>
+
+</html>

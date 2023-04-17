@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/web/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<!-- Contact Start -->
+	    <div class="container-fluid">
+	        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-center"><span class="bg-secondary pr-3">Login</span></h2>
+	        <i class="section-title position-relative text-uppercase mx-xl-5 mb-4" th:text=${messageLogin}></i>
+	        <div class="row px-xl-5">
+	            <div class="col-lg-12 mb-5">
+	                <div class="contact-form bg-light p-30">
+	                    <form th:action="@{/security/login}" method="post">
+	                        <div class="control-group">
+	                        	<label>Username</label>
+	                            <input name="username" type="text" class="form-control" />
+	                            <p class="help-block text-danger"></p>
+	                        </div>
+	                        <div class="control-group">
+	                        	<label>Password</label>
+	                            <input name="password" type="password" class="form-control" />
+	                            <p class="help-block text-danger"></p>
+	                        </div>
+	                        <div class="control-group">
+	                        	<label>Remember me?</label>
+	                        	<input name="remember-me" type="checkbox">
+	                        </div>
+	                        <div>
+	                            <button class="btn btn-primary py-2 px-4" type="submit">Sign in</button>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
+	
+	        </div>
+	    </div>
+	    <!-- Contact End -->
+	    
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/web/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${item}">
+		<!-- Hiển thị trang view.html vào đây -->
+		<div th:replace="~{/web/cart/view :: shopping_cart}"></div>
+
+		<div class="container-fluid">
+			<div class="row px-xl-5">		
+				<!-- Checkout Start -->
+				<div class="col-lg-8">
+		            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+		            <div class="bg-light p-30">
+		                <div class="row">
+		                    <div class="col-md-6 form-group">
+		                        <label>Customer:</label>
+		                        <div class="form-control">{{$auth.user.userFullname}}</div>
+		                    </div>
+		                    <div class="col-md-6 form-group">
+		                        <label>Order Date:</label>
+		                        <div class="form-control">{{order.createdDate | date : 'dd-MM-yyyy'}}</div>
+		                    </div>
+		                    <div class="col-md-12 form-group">
+		                        <label>Shipping Address</label>
+		                        <textarea ng-model="order.address" cols="30" rows="5" class="col-md-12 form-group"></textarea>
+		                    </div>
+		                </div>
+		                <button ng-click="order.purchase()" class="btn btn-primary">Purchase</button>
+		            </div>
+		        </div>
+		        <!-- Checkout End -->
+			</div>	
+		</div>
+	</main>
+</body>
+
+</html>

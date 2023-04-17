@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/web/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<!-- register Start -->
+		<form th:action="@{/account/register}" method="post">
+			<div class="container-fluid" >
+				<div class="row px-xl-5">
+					<div class="col-lg-12" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+						<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Register</span></h5>
+						<i class="mb-3" th:text=${message}></i>
+						<div class="bg-light p-30 mb-5" style="width: 40%">
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="username">Username</label>
+									<input class="form-control" type="text" id="username" name="username" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="password">Password</label>
+									<input class="form-control" type="password" id="password" name="password" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="userFullname">Full Name</label>
+									<input class="form-control" type="text" id="userFullname" name="userFullname" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="userEmail">Email</label>
+									<input class="form-control" type="text" id="userEmail" name="userEmail" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="userPhone">Phone</label>
+									<input class="form-control" type="text" id="userPhone" name="userPhone" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label for="userImage">Image</label>
+									<input class="form-control" type="file" id="userImage" name="userImage">
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary px-3">Register</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- register End -->
+		</form>
+	</main>
+</body>
+
+</html>
